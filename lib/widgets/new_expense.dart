@@ -31,7 +31,7 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  print(_enteredTitle);
+                  // print(_enteredTitle);
                 },
                 child: const Text('Save Expense'),
               ),
