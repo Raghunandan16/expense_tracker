@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:expense_tracker/models/expense.dart';
 import 'package:flutter/material.dart';
 
@@ -81,18 +79,15 @@ class _NewExpenseState extends State<NewExpense> {
           Row(
             children: [
               DropdownButton(
-                items: Category.values
-                    .map(
-                      (category) => DropdownMenuItem(
-                        value: category,
-                        child: Text(category.name.toString()),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  print(value);
-                },
-              ),
+                  items: Category.values
+                      .map((category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category.name.toUpperCase()),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    print(value);
+                  }),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
