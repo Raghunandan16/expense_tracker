@@ -2,14 +2,17 @@ import 'package:expense_tracker/models/expense.dart';
 import 'package:flutter/material.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({super.key, required this.addNewExpense});
+  final void Function(Expense) addNewExpense;
   @override
   State<NewExpense> createState() {
-    return _NewExpenseState();
+    return _NewExpenseState(addNewExpense: addNewExpense);
   }
 }
 
 class _NewExpenseState extends State<NewExpense> {
+  _NewExpenseState({required this.addNewExpense});
+  final void Function(Expense) addNewExpense;
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   Category _selectedCategory = Category.food;
@@ -27,9 +30,8 @@ class _NewExpenseState extends State<NewExpense> {
   void _submitExpenseData() {
     final enteredAmount = double.tryParse(_amountController.text);
     final isAmountInvalid = enteredAmount == null || enteredAmount <= 0;
-    if (_titleController.text.trim().isEmpty ||
-        isAmountInvalid ||
-        _selectedDate == null) {
+    final enteredTitle = _titleController.text.trim();
+    if (enteredTitle.isEmpty || isAmountInvalid || _selectedDate == null) {
       // Show an error
       showDialog(
         context: context,
@@ -48,6 +50,13 @@ class _NewExpenseState extends State<NewExpense> {
       );
       return;
     }
+    addNewExpense(
+      Expense(
+          title: enteredTitle,
+          amount: enteredAmount,
+          date: _selectedDate!,
+          category: _selectedCategory),
+    );
   }
 
   @override
