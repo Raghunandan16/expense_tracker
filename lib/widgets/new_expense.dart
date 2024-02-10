@@ -6,13 +6,16 @@ class NewExpense extends StatefulWidget {
   final void Function(Expense) addNewExpense;
   @override
   State<NewExpense> createState() {
-    return _NewExpenseState(addNewExpense: addNewExpense);
+    return _NewExpenseState();
   }
 }
 
 class _NewExpenseState extends State<NewExpense> {
-  _NewExpenseState({required this.addNewExpense});
-  final void Function(Expense) addNewExpense;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   Category _selectedCategory = Category.food;
@@ -50,7 +53,7 @@ class _NewExpenseState extends State<NewExpense> {
       );
       return;
     }
-    addNewExpense(
+    widget.addNewExpense(
       Expense(
           title: enteredTitle,
           amount: enteredAmount,
