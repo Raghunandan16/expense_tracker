@@ -27,10 +27,18 @@ class _ExpensesState extends State<Expenses> {
       category: Category.leisure,
     ),
   ];
+  void addNewExpense(Expense ex) {
+    setState(() {
+      _registeredExpenses.add(ex);
+    });
+  }
+
   void _addExpenseOverlay() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(
+        addNewExpense: addNewExpense,
+      ),
     );
   }
 
