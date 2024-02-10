@@ -31,6 +31,22 @@ class _NewExpenseState extends State<NewExpense> {
         isAmountInvalid ||
         _selectedDate == null) {
       // Show an error
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text("Invalid Input"),
+          content: const Text(
+              "Please make sure a valid title, amount, date and category was entered."),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                },
+                child: const Text('Okay'))
+          ],
+        ),
+      );
+      return;
     }
   }
 
